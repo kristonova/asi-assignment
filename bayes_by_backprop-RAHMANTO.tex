@@ -1,0 +1,110 @@
+
+\documentclass{article}
+\usepackage[preprint]{neurips_2024}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{booktabs}
+
+\title{Reproducing ``Weight Uncertainty in Neural Networks'' with PyTorch: \\ A Variational Bayesian Perspective}
+
+\author{
+  Krisostomus Nova Rahmanto \\
+  EURECOM, France \\
+  \texttt{krisostomus.nova@eurecom.fr} \\
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This report documents a reproduction and extension of the seminal work ``Weight Uncertainty in Neural Networks'' by Blundell et al. (2015), which proposed Bayes by Backprop as a scalable variational inference algorithm for Bayesian neural networks. The implementation is done in PyTorch, with experiments conducted on FashionMNIST and MNIST datasets. We validate both predictive performance and uncertainty quantification capabilities through extensive Monte Carlo sampling and out-of-distribution analysis. The results confirm the key theoretical insights of the original paper and demonstrate the applicability of variational Bayesian methods in modern neural network training.
+\end{abstract}
+
+\section{Introduction}
+
+Bayesian neural networks (BNNs) are designed to capture uncertainty over parameters by modeling weights as probability distributions rather than fixed point estimates. This offers a principled way to quantify uncertainty and avoid overfitting. Blundell et al. (2015) introduced \textit{Bayes by Backprop}, an efficient method for performing variational inference in BNNs using the reparameterization trick.
+
+In this report, we reproduce their methodology using PyTorch, apply it to the FashionMNIST dataset, and evaluate the epistemic uncertainty of the model on both in-domain and out-of-distribution (OOD) inputs.
+
+\section{Methodology}
+
+\subsection{Bayesian Neural Network Formulation}
+
+The training objective is the negative evidence lower bound (ELBO), which consists of two terms:
+\[
+\mathcal{L} = \mathbb{E}_{q(w|\theta)} [-\log p(D|w)] + \mathrm{KL}(q(w|\theta) \| p(w))
+\]
+where $q(w|\theta)$ is a Gaussian variational posterior with parameters $\mu$ and $\rho$, and $p(w)$ is a prior modeled as a scale mixture of two Gaussians.
+
+To ensure positivity of the standard deviation, we use:
+\[
+\sigma = \log(1 + e^{\rho})
+\]
+Sampling is performed using the reparameterization trick:
+\[
+w = \mu + \sigma \cdot \epsilon, \quad \epsilon \sim \mathcal{N}(0, 1)
+\]
+
+\subsection{Model Architecture and Training}
+
+We use a fully connected network with three layers (784--400--400--10), each represented as a \texttt{BayesianLinear} layer. The output is processed with log-softmax and trained using negative log-likelihood combined with KL divergence. The prior is implemented as a scale mixture Gaussian with $\pi = 0.5$, $\sigma_1 = 1$, $\sigma_2 = \exp(-6)$.
+
+\section{Experimental Setup}
+
+\subsection{Dataset and Implementation}
+
+The model is trained on the FashionMNIST dataset, using batches of 100 samples and Adam optimizer. For uncertainty analysis, we evaluate:
+\begin{itemize}
+    \item \textbf{In-domain}: FashionMNIST test set.
+    \item \textbf{Out-of-domain}: MNIST digit images.
+\end{itemize}
+
+We log histograms of weight distributions and loss scalars to TensorBoard, and visualize prediction histograms from 100 forward passes.
+
+\section{Results}
+
+\subsection{Classification Accuracy}
+
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Evaluation Mode & Accuracy (\%) \\
+\midrule
+Posterior Mean (1 sample) & 87.7 \\
+Monte Carlo Ensemble (100 samples) & 88.3 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{In-Domain Uncertainty}
+
+Histograms of predictions for 5 FashionMNIST images show sharp, unimodal distributions across 100 samples—indicating low epistemic uncertainty for familiar inputs.
+
+\subsection{Out-of-Domain Uncertainty}
+
+When MNIST digit images are passed through the model, the prediction histograms become wide and multimodal, with frequent misclassifications spread across multiple categories. This highlights the model’s awareness of distributional shift and reflects higher epistemic uncertainty.
+
+\section{Discussion}
+
+The results align with the findings of Blundell et al.:
+\begin{itemize}
+    \item Variational Bayesian inference provides regularization through weight uncertainty.
+    \item Predictive performance is competitive with deterministic models.
+    \item The model expresses uncertainty appropriately when faced with unfamiliar data.
+\end{itemize}
+
+This implementation not only reproduces the core methodology but also extends it with detailed visualization of class-wise uncertainty for individual samples.
+
+\section{Conclusion}
+
+Bayes by Backprop remains a foundational method for scalable Bayesian deep learning. Our reproduction validates the theoretical underpinnings and demonstrates practical utility in handling uncertainty. Future extensions include convolutional Bayesian layers and calibration analysis.
+
+\bibliographystyle{plain}
+\begin{thebibliography}{9}
+\bibitem{blundell2015}
+Blundell, C., Cornebise, J., Kavukcuoglu, K., \& Wierstra, D. (2015). Weight Uncertainty in Neural Networks. \textit{International Conference on Machine Learning (ICML)}.
+\end{thebibliography}
+
+\end{document}
