@@ -10,8 +10,8 @@
 
 \author{
   Krisostomus Nova Rahmanto \\
-  EURECOM, France \\
-  \texttt{rahmanto@eurecom.fr} \\
+  EURECOM, France; PT Sadasa Akademi Indonesia \\
+  \texttt{rahmanto@eurecom.fr, kristonova@sadasa.id} \\
 }
 
 \begin{document}
@@ -84,24 +84,6 @@ $\pi$ & $\sigma_1$ & $\sigma_2$ & Validation Acc.\ (\%) \\
 
 Table~\ref{tab:hp} reports the four most performant settings; notably, the optimum coincides with the configuration highlighted in the original paper—namely $\pi=0.25$, $\sigma_{1}=1.0$ (i.e.\ $-\!\log\sigma_1=0$) and $\sigma_{2}=3.35\times10^{-4}$ (i.e.\ $-\!\log\sigma_2=8$).  
 This setting reached \textbf{97.95\%} validation accuracy for a hidden width of 800 and was subsequently fixed for all 300‑epoch runs discussed in Section~\ref{sec:results}.
-
-\subsection{Bayesian Neural Network Formulation}
-
-The training objective is the negative evidence lower bound (ELBO), which consists of two terms:
-\[
-\mathcal{L} = \mathbb{E}_{q(w|\theta)} [-\log p(D|w)] + \mathrm{KL}(q(w|\theta) \| p(w))
-\]
-where $q(w|\theta)$ is a Gaussian variational posterior with parameters $\mu$ and $\rho$, and $p(w)$ is a prior modeled as a scale mixture of two Gaussians.
-
-To ensure positivity of the standard deviation, we use:
-\[
-\sigma = \log(1 + e^{\rho})
-\]
-Sampling is performed using the reparameterization trick:
-\[
-w = \mu + \sigma \cdot \epsilon, \quad \epsilon \sim \mathcal{N}(0, 1)
-\]
-
 
 \subsection{Model Architecture and Training}
 
