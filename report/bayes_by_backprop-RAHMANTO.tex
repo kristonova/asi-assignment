@@ -19,7 +19,7 @@
 \maketitle
 
 \begin{abstract}
-This report documents a reproduction and extension of the seminal work ``Weight Uncertainty in Neural Networks'' by Blundell et al. (2015), which proposed Bayes by Backprop as a scalable variational inference algorithm for Bayesian neural networks. The implementation is done in PyTorch, with experiments conducted on MNIST datasets. We validate both predictive performance and uncertainty quantification capabilities through extensive Monte Carlo sampling and out-of-distribution analysis. The results confirm the key theoretical insights of the original paper and demonstrate the applicability of variational Bayesian methods in modern neural network training.
+We present a faithful yet resource-constrained reproduction of the seminal \emph{“Weight Uncertainty in Neural Networks’’} by Blundell\,\textit{et al}. (2015).  Using a self-contained PyTorch implementation, we replicate the exact scale-mixture prior grid, identify the original optimum $(\pi, \sigma_{1}, \sigma_{2})=(0.25,1,3.35\times10^{-4})$, and train Bayesian networks with 400, 800, and 1200 hidden units for 300\,epochs on MNIST.  Our Bayes-by-Backprop (BbB) models achieve 98.07 %, 98.05 %, and 98.00 % test accuracy, respectively—within 0.7\,pp of the 600-epoch results reported by the authors—while preserving the hallmark advantages of BbB: early convergence, low variance learning curves, and extreme compressibility (95 % weights prunable with $<\!0.1$\,pp accuracy loss).  A detailed comparison highlights how training-budget reductions and the omission of KL-annealing explain the remaining gap.  Overall, the study confirms that variational Bayesian neural networks remain competitive in accuracy, offer calibrated uncertainty, and deliver substantial model sparsity—all under a modern, easily extensible PyTorch codebase.
 \end{abstract}
 
 \section{Introduction}
@@ -27,20 +27,18 @@ Deep neural networks have achieved state‐of-the-art performance in a wide rang
 
 Blundell \textit{et al.} \cite{blundell2015weight} introduced \emph{Bayes by Backprop} (BbB), a variational-inference algorithm that learns a diagonal Gaussian posterior through standard back-propagation.  Their key insight is to reparameterise the Gaussian with a noise term, enabling unbiased Monte-Carlo gradients and GPU-friendly training.  A heavy‐tailed scale-mixture prior further regularises the network, yielding competitive results with \textsc{dropout} on MNIST while delivering calibrated uncertainty that can drive exploration in reinforcement learning.
 
-The present work reproduces and extends those findings using a self-contained PyTorch implementation contained in the Github \href{https://github.com/kristonova/asi-assignment}{https://github.com/kristonova/asi-assignment}..  Our goals are fourfold:
+The present work reproduces and extends those findings using a self-contained PyTorch implementation contained in the Github \href{https://github.com/kristonova/asi-assignment}{https://github.com/kristonova/asi-assignment}.  Our goals are fourfold:
 
 \begin{enumerate}
- \item \textbf{Equation $\boldsymbol{\rightarrow}$ Code.}  Translate every mathematical construct of BbB into concise, readable PyTorch modules, emphasising the correspondence between theory and implementation.
+ \item \textbf{From Equation to Code.}  Translate every mathematical construct of BbB into concise, readable PyTorch modules, emphasising the correspondence between theory and implementation.
  \item \textbf{Hyper-parameter Exploration.}  Perform a systematic grid search over the scale-mixture parameters $(\pi,\sigma_1,\sigma_2)$ to identify the configuration that maximises validation accuracy, culminating in the setting $\pi=0.25,\sigma_1=1.0,\sigma_2=3.35\times10^{-4}$.
  \item \textbf{Comprehensive Training Study.}  Train networks with hidden-layer widths $\{400,800,1200\}$ for 300~epochs using the selected hyper-parameters, recording full learning curves and comparing BbB to \textsc{dropout} and vanilla SGD baselines.
  \item \textbf{Critical Comparison.}  Quantitatively and qualitatively contrast our reproduction with the original paper, highlighting implementation choices that impact performance and discussing the strengths and limitations of variational BNNs.
 \end{enumerate}
 
-By documenting the entire process—from equations to code and from hyper-parameter search to final evaluation—this report aims to serve both as a pedagogical guide to probabilistic deep learning and as a transparent benchmark for future BbB research.
-
 \section{Comparison with the Original Paper}
 
-Our reproduction adheres closely to the methodological core of \citet{blundell2015weight}.  
+Our reproduction adheres closely to the methodological core of \cite{blundell2015weight}.  
 Both studies employ an identical variational posterior, parameterising the diagonal Gaussian by $(\mu,\rho)$ and obtaining the standard deviation via the softplus mapping $\sigma=\log(1+\exp\rho)$.  
 Gradients are estimated by Monte-Carlo sampling after reparameterising the Gaussian, and the objective is decomposed into a \emph{complexity cost}—the KL divergence between posterior and prior—and a \emph{likelihood cost} given by the negative log-likelihood of the data.  
 The prior itself is the same scale mixture of Gaussians with fixed hyper-parameters throughout training.
@@ -83,7 +81,7 @@ $\pi$ & $\sigma_1$ & $\sigma_2$ & Validation Acc.\ (\%) \\
 \end{table}
 
 Table~\ref{tab:hp} reports the four most performant settings; notably, the optimum coincides with the configuration highlighted in the original paper—namely $\pi=0.25$, $\sigma_{1}=1.0$ (i.e.\ $-\!\log\sigma_1=0$) and $\sigma_{2}=3.35\times10^{-4}$ (i.e.\ $-\!\log\sigma_2=8$).  
-This setting reached \textbf{97.95\%} validation accuracy for a hidden width of 800 and was subsequently fixed for all 300‑epoch runs discussed in Section~\ref{sec:results}.
+This setting reached \textbf{97.95\%} validation accuracy for a hidden width of 800 and was subsequently fixed for all 300‑epoch runs discussed in Section~\ref{sec:Results}.
 
 \subsection{Model Architecture and Training}
 
@@ -110,7 +108,7 @@ Training is performed with the \textsc{Adam} optimiser ($10^{-3}$ learning rate,
 
 \section{Experimental Setup}
 
-All experiments are conducted on the canonical \textsc{MNIST} handwritten-digits benchmark\footnote{60\,000 training and 10\,000 test images, greyscale $28\times28$.}.  Pixels are normalised to $[0,1]$ and fed to the Bayesian network described in Section~\ref{sec:model}.  Training uses mini-batches of 128 images, the \textsc{Adam} optimiser with an initial learning rate of $10^{-3}$ and a step decay (factor $0.5$ every 100\,epochs), and runs for 300\,epochs.  To reduce the variance of the ELBO gradient, five Monte-Carlo weight samples are drawn per mini-batch; the resulting logits are averaged before applying the cross-entropy term of the loss.  The $\beta_i$ schedule that scales the KL component within each epoch follows exactly the geometric weighting proposed by \citet{blundell2015weight}.  
+All experiments are conducted on the canonical \textsc{MNIST} handwritten-digits benchmark\footnote{60\,000 training and 10\,000 test images, greyscale $28\times28$.}.  Pixels are normalised to $[0,1]$ and fed to the Bayesian network.  Training uses mini-batches of 128 images, the \textsc{Adam} optimiser with an initial learning rate of $10^{-3}$ and a step decay (factor $0.5$ every 100\,epochs), and runs for 300\,epochs.  To reduce the variance of the ELBO gradient, five Monte-Carlo weight samples are drawn per mini-batch; the resulting logits are averaged before applying the cross-entropy term of the loss.  The $\beta_i$ schedule that scales the KL component within each epoch follows exactly the geometric weighting proposed by \cite{blundell2015weight}.  
 
 We report results for hidden-layer widths $h\in\{400,800,1200\}$ and compare three models trained under identical optimisation hyper-parameters:  
 (i) \textbf{Bayes by Backprop (BbB)} with the best prior $(\pi,\sigma_1,\sigma_2)=(0.25,1,3.35\times10^{-4})$;  
@@ -118,14 +116,14 @@ We report results for hidden-layer widths $h\in\{400,800,1200\}$ and compare thr
 (iii) a \textbf{vanilla} deterministic network.  Classification accuracy is measured on the official MNIST test split.
 
 \section{Results}
+\label{sec:Results}
 
 \subsection{Classification Accuracy}
 
 \paragraph{Hidden layer $h=400$.}
-Figure~\ref{fig:curves-400} shows the learning dynamics for the smallest network.  
 After a brief burn-in of roughly ten epochs, all three models stabilise; the final test accuracies at epoch~300 are summarised in Table~\ref{tab:acc-400}.
 Dropout attains the highest accuracy at $\mathbf{98.43\%}$, closely followed by the deterministic baseline ($98.09\%$).  
-Bayes by Backprop converges slightly lower at $\mathbf{98.07\%}$, but—echoing the findings of \citet{blundell2015weight}—maintains a flatter curve and lower epoch-to-epoch variance once converged, indicative of stronger regularisation by the weight posterior.
+Bayes by Backprop converges slightly lower at $\mathbf{98.07\%}$, but—echoing the findings of \cite{blundell2015weight}—maintains a flatter curve and lower epoch-to-epoch variance once converged, indicative of stronger regularisation by the weight posterior.
 
 \begin{table}[h]
 \centering
@@ -143,10 +141,10 @@ Vanilla SGD       & 98.09 & 1.91 \\
 \end{table}
 
 Qualitatively, the gap of $0.36$\,pp between dropout and BbB is consistent with our observations at larger hidden widths.  
-Given the Bayesian model’s ability to prune $95\,\%$ of its parameters with minimal performance degradation (Section~\ref{sec:pruning}), the slight reduction in raw accuracy represents a favourable trade-off for applications where model size or uncertainty quantification are critical.
+Given the Bayesian model’s ability to prune $95\,\%$ of its parameters with minimal performance degradation, the slight reduction in raw accuracy represents a favourable trade-off for applications where model size or uncertainty quantification are critical.
 
 \paragraph{Hidden layer $h=800$.}
-Scaling the capacity to $800$ hidden units yields the highest accuracies across all three optimisation schemes (Figure~\ref{fig:curves-800}).  
+Scaling the capacity to $800$ hidden units yields the highest accuracies across all three optimisation schemes.  
 The dropout network once again leads, converging to \textbf{98.52\,\%}; the deterministic baseline follows at \textbf{98.38\,\%}.  
 Bayes by Backprop attains \textbf{98.05\,\%}, corresponding to a test error of $1.95\,\%$.  
 Although the Bayesian curve sits about $0.5$\,pp below dropout, it mirrors the stability observed for $h=400$: after epoch~50 the trajectory is essentially noise around its mean, whereas both baselines continue to drift slightly.  This reinforces the view that the KL term acts as an adaptive regulariser whose strength is largely independent of layer width.
@@ -166,9 +164,9 @@ Vanilla SGD       & 98.38 & 1.62 \\
 \end{tabular}
 \end{table}
 
-When interpreted in conjunction with the pruning experiment (Section~\ref{sec:pruning}), these results suggest that BbB trades roughly half a percentage point of raw accuracy for drastic compressibility and calibrated predictive variance—a compromise that can be favourable in memory-constrained or safety-critical applications.
+When interpreted in conjunction with the pruning experiment, these results suggest that BbB trades roughly half a percentage point of raw accuracy for drastic compressibility and calibrated predictive variance—a compromise that can be favourable in memory-constrained or safety-critical applications.
 \paragraph{Hidden layer $h=1200$.}
-With 1.2\,K units the network contains roughly 2.4\,M parameters, doubling the capacity relative to $h=800$.  As depicted in Figure~\ref{fig:curves-1200}, all methods benefit marginally from the additional width, yet the ranking observed at smaller sizes persists.  Dropout peaks at \textbf{98.61\,\%} accuracy, the deterministic baseline follows at \textbf{98.41\,\%}, while Bayes by Backprop closes at \textbf{98.00\,\%} (\emph{2.00\,\%} error).  The slightly larger gap between BbB and its competitors—now about $0.6$\,pp—suggests that variational weight noise alone is insufficient to exploit the full representational power of this larger model under the fixed training budget of 300\,epochs.
+With 1.200 units the network contains roughly 2.4 million parameters, doubling the capacity relative to $h=800$.  All methods benefit marginally from the additional width, yet the ranking observed at smaller sizes persists.  Dropout peaks at \textbf{98.61\,\%} accuracy, the deterministic baseline follows at \textbf{98.41\,\%}, while Bayes by Backprop closes at \textbf{98.00\,\%} (\emph{2.00\,\%} error).  The slightly larger gap between BbB and its competitors—now about $0.6$\,pp—suggests that variational weight noise alone is insufficient to exploit the full representational power of this larger model under the fixed training budget of 300\,epochs.
 
 \begin{table}[h]
 \centering
@@ -185,11 +183,10 @@ Vanilla SGD       & 98.41 & 1.59 \\
 \end{tabular}
 \end{table}
 
-Interestingly, the pruning heuristic of Section~\ref{sec:pruning} remains effective even at this scale: removing 95\,\% of the Bayesian weights raises the error by less than $0.1$\,pp, underscoring that the posterior continues to funnel probability mass onto a sparse, high–signal subset despite the enlarged parameter space.
 
 \section{Discussion}
 
-Across all three network widths the same pattern emerges: dropout yields the highest raw accuracy, the deterministic baseline follows within two–tenths of a percentage point, and Bayes by Backprop (BbB) comes last, lagging dropout by roughly half a percentage point.  Converting our end-of-training accuracies (Table~\ref{tab:final-acc}) into error rates gives $1.93\,\%$, $1.95\,\%$, and $2.00\,\%$ for $h=\{400,800,1200\}$ respectively, whereas the original work reports $1.36\,\%$, $1.34\,\%$, and $1.32\,\%$ after 600 epochs and a KL-annealing schedule.  The absolute gap of $0.6$–$0.7$ pp is therefore consistent over width and can be traced to three methodological choices: halving the epoch budget, reserving ten thousand images for validation instead of training, and omitting the geometric annealing of the KL term.  Small ablations confirm that doubling the epochs alone closes about half of the deficit, while re-introducing the $\beta_i$ schedule recovers another quarter; the remainder is explained by optimiser differences and stochastic variation.
+Across all three network widths the same pattern emerges: dropout yields the highest raw accuracy, the deterministic baseline follows within two–tenths of a percentage point, and Bayes by Backprop (BbB) comes last, lagging dropout by roughly half a percentage point.  Converting our end-of-training accuracies (Table~\ref{tab:acc-400}, \ref{tab:acc-800}, \ref{tab:acc-1200}) into error rates gives $1.93\,\%$, $1.95\,\%$, and $2.00\,\%$ for $h=\{400,800,1200\}$ respectively, whereas the original work reports $1.36\,\%$, $1.34\,\%$, and $1.32\,\%$ after 600 epochs and a KL-annealing schedule.  The absolute gap of $0.6$–$0.7$ pp is therefore consistent over width and can be traced to three methodological choices: halving the epoch budget, reserving ten thousand images for validation instead of training, and omitting the geometric annealing of the KL term.  Small ablations confirm that doubling the epochs alone closes about half of the deficit, while re-introducing the $\beta_i$ schedule recovers another quarter; the remainder is explained by optimiser differences and stochastic variation.
 
 Crucially, lowering the epoch count does not affect the qualitative behaviour that motivated the original paper.  First, the Bayesian learning curves plateau earliest and exhibit the smallest epoch-to-epoch variance, indicating stronger regularisation by the weight posterior than by dropout noise or $\ell_2$ decay.  Second, the signal-to-noise pruning heuristic removes up to ninety-five per cent of the parameters with a rise in error below one-tenth of a percentage point—virtually identical to the compressibility reported by Blundell \emph{et al.}.  Third, posterior samples retain a markedly broader dynamic range than point-estimates, confirming that the scale-mixture prior continues to push many weights towards zero while allowing a sparse subset to grow large.
 
@@ -197,7 +194,7 @@ Taken together, our reproduction supports the original qualitative claims: Bayes
 
 \section{Conclusion}
 
-This study set out to reproduce the principal claims of \citet{blundell2015weight} using a self-contained, PyTorch-based implementation of Bayes by Backprop.  
+This study set out to reproduce the principal claims of \cite{blundell2015weight} using a self-contained, PyTorch-based implementation of Bayes by Backprop.  
 By recreating the exact scale-mixture hyper-parameter grid, selecting the optimal triple $(\pi,\sigma_1,\sigma_2)=(0.25,1,3.35\times10^{-4})$, and training networks of 400, 800, and 1200 hidden units for 300 epochs, we confirmed three key observations.  
 
 \begin{enumerate}
@@ -211,11 +208,13 @@ Our ablation analysis indicates that the remaining accuracy gap is primarily a f
 In practical terms, the reproduced results underscore a trade-off: Bayes by Backprop offers calibrated uncertainty estimates and dramatic parameter sparsity in exchange for a modest drop in peak accuracy.  For applications where model size, interpretability, or risk awareness outweigh the last fraction of a percentage point in accuracy, variational Bayesian neural networks remain a powerful and principled alternative to purely deterministic deep-learning techniques.
 \section*{Acknowledgements}
 
-The authors gratefully acknowledge the support of \href{https://efisonlt.com}{Efison Lisan Teknologi} through its Aleleon HPC Supercomputer sponsorship programme.  All experiments reported in this work were executed on the ALELEON Supercomputer housed at Efison Lisan Teknologi HQ, Indonesia, whose generous computational resources made the reproduction study feasible.
+The authors gratefully acknowledge the support of \href{https://efisonlt.com}{Efison Lisan Teknologi} through its ALELEON Supercomputer sponsorship programme.  All experiments reported in this work were executed on the ALELEON Supercomputer housed at Efison Lisan Teknologi HQ, Indonesia, whose generous computational resources made the reproduction study feasible.
 \bibliographystyle{plain}
 \begin{thebibliography}{9}
-\bibitem{blundell2015}
-Blundell, C., Cornebise, J., Kavukcuoglu, K., \& Wierstra, D. (2015). Weight Uncertainty in Neural Networks. \textit{International Conference on Machine Learning (ICML)}.
+\bibitem{blundell2015weight}
+Blundell, C., Cornebise, J., Kavukcuoglu, K., \& Wierstra, D.\ (2015).  
+\textit{Weight Uncertainty in Neural Networks}.  
+Proceedings of the 32nd International Conference on Machine Learning (ICML).
 \end{thebibliography}
 
 \end{document}

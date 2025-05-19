@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.4.25)  19 MAY 2025 11:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.4.25)  19 MAY 2025 20:59
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -403,10 +403,6 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 20.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-
-Package natbib Warning: Citation `blundell2015weight' on page 1 undefined on input line 28.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 35--36
 []\OT1/ptm/b/n/10 Comprehensive Train-ing Study. \OT1/ptm/m/n/10 Train net-works with hidden-layer widths
  []
@@ -417,98 +413,39 @@ Underfull \hbox (badness 10000) in paragraph at lines 35--36
 
 
 {/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc}]
-
-Package natbib Warning: Citation `blundell2015weight' on page 2 undefined on input line 43.
-
-
-Overfull \hbox (1.18326pt too wide) detected at line 66
+Overfull \hbox (1.18326pt too wide) detected at line 64
 \OML/cmm/m/it/10 ^^Y \OMS/cmsy/m/n/10 2 f\OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 25\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 50\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 75\OMS/cmsy/m/n/10 g\OML/cmm/m/it/10 ;  ^^[[] \OMS/cmsy/m/n/10 2 f\OT1/cmr/m/n/10 1\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 0\OML/cmm/m/it/10 ;  \OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 368\OML/cmm/m/it/10 ;  \OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 135\OMS/cmsy/m/n/10 g\OML/cmm/m/it/10 ;  ^^[[] \OMS/cmsy/m/n/10 2 f\OT1/cmr/m/n/10 2\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 48  \OMS/cmsy/m/n/10 ^^B  \OT1/cmr/m/n/10 10[]\OML/cmm/m/it/10 ;  \OT1/cmr/m/n/10 9\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 12  \OMS/cmsy/m/n/10 ^^B  \OT1/cmr/m/n/10 10[]\OML/cmm/m/it/10 ;  \OT1/cmr/m/n/10 3\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 35  \OMS/cmsy/m/n/10 ^^B  \OT1/cmr/m/n/10 10[]\OMS/cmsy/m/n/10 g\OML/cmm/m/it/10 ;
  []
-
-
-LaTeX Warning: Reference `sec:results' on page 2 undefined on input line 86.
 
 
 
 [2]
 
-LaTeX Warning: Reference `sec:model' on page 3 undefined on input line 113.
-
-
-Package natbib Warning: Citation `blundell2015weight' on page 3 undefined on input line 113.
-
-
-LaTeX Warning: Reference `fig:curves-400' on page 3 undefined on input line 125.
-
-
-Package natbib Warning: Citation `blundell2015weight' on page 3 undefined on input line 128.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: Reference `sec:pruning' on page 3 undefined on input line 146.
-
-
-LaTeX Warning: Reference `fig:curves-800' on page 3 undefined on input line 149.
-
-
-
 [3]
-
-LaTeX Warning: Reference `sec:pruning' on page 4 undefined on input line 169.
-
-
-LaTeX Warning: Reference `fig:curves-1200' on page 4 undefined on input line 171.
-
-
-LaTeX Warning: Reference `sec:pruning' on page 4 undefined on input line 188.
-
-
-LaTeX Warning: Reference `tab:final-acc' on page 4 undefined on input line 192.
-
-
 
 [4]
 
-Package natbib Warning: Citation `blundell2015weight' on page 5 undefined on input line 200.
-
-
-Underfull \vbox (badness 2689) has occurred while \output is active []
-
-
-
-[5]
-
-Package natbib Warning: There were undefined citations.
-
-
-
-[6] (./bayes_by_backprop-RAHMANTO.aux)
+[5] (./bayes_by_backprop-RAHMANTO.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `bayes_by_backprop-RAHMANTO.out' has not changed.
 (rerunfilecheck)             Checksum: 924959F3AC82495CA680E5E76D9F8DCF;1396.
  ) 
 Here is how much of TeX's memory you used:
- 10818 strings out of 473190
- 164301 string characters out of 5715800
- 574857 words of memory out of 5000000
- 33883 multiletter control sequences out of 15000+600000
- 582710 words of font info for 87 fonts, out of 8000000 for 9000
+ 10799 strings out of 473190
+ 164107 string characters out of 5715800
+ 575887 words of memory out of 5000000
+ 33871 multiletter control sequences out of 15000+600000
+ 580880 words of font info for 81 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,12n,79p,1224b,551s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on bayes_by_backprop-RAHMANTO.pdf (6 pages, 187244 bytes).
+ 75i,12n,79p,1302b,449s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on bayes_by_backprop-RAHMANTO.pdf (5 pages, 178838 bytes).
 PDF statistics:
  180 PDF objects out of 1000 (max. 8388607)
- 140 compressed objects within 2 object streams
- 35 named destinations out of 1000 (max. 500000)
+ 143 compressed objects within 2 object streams
+ 34 named destinations out of 1000 (max. 500000)
  81 words of extra memory for PDF output out of 10000 (max. 10000000)
 
