@@ -1,7 +1,7 @@
-This is LuaTeX, Version 1.21.0 (TeX Live 2025)  (format=dvilualatex 2025.4.25)  15 MAY 2025 21:33
+This is LuaTeX, Version 1.21.0 (TeX Live 2025)  (format=dvilualatex 2025.4.25)  19 MAY 2025 10:07
  restricted system commands enabled.
 **/Users/mymac/Study Abroad/Master Computer Science EURECOM/ASI/Assignment/asi-
-assignment/bayes_by_backprop-RAHMANTO.tex
+assignment/bbb_reproduction_report.tex
 (/Users/mymac/Study
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -51,7 +51,7 @@ ec, 3 attribute_list, 1 temp nodes
    avail lists: 2:5,3:3,4:1,5:1,7:1
  23143 multiletter control sequences out of 65536+600000
  14 fonts using 591679 bytes
- 15i,0n,18p,172b,15s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 15i,0n,18p,169b,15s stack positions out of 10000i,1000n,20000p,200000b,200000s
 !  ==> Fatal error occurred, bad output DVI file produced!
 No pages of output.
 
