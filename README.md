@@ -1,15 +1,15 @@
 # asi-assignment
-This repository contains an advanced implementation of Bayesian Neural Networks using the Bayes by Backprop algorithm created by Krisostomus Nova RAHMANTO. This project was developed as part of the Advanced Statistical Inference (ASI) course at EURECOM (Spring 2025).
+This repository presents a reproducible implementation of Bayesian Neural Networks using the Bayes by Backprop algorithm, as developed by Krisostomus Nova RAHMANTO. This work was undertaken as part of the Advanced Statistical Inference (ASI) course at EURECOM (Spring 2025).
 
 ## Overview
-- Implementation of weight uncertainty through variational inference.
-- A PyTorch-based Bayesian neural network with custom BayesianLinear layers.
-- Training on the FashionMNIST dataset with detailed uncertainty analysis.
-- Evaluation using both in-domain (FashionMNIST) and out-of-domain (MNIST) data.
-- Visualization of model uncertainty using Monte Carlo sampling and TensorBoard logging.
+- Implementation of weight uncertainty via variational inference.
+- A PyTorch-based Bayesian neural network employing two BayesianLinear layers.
+- Training and evaluation conducted on the MNIST dataset with rigorous uncertainty quantification.
+- Comparison against baseline models including DropoutNN and VanillaNN.
+- Detailed hyperparameter tuning, Monte Carlo sampling for ELBO estimation, and extensive analysis of weight distributions and model uncertainty.
 
 ## Contents
-- **Modeling:** Bayesian network architecture with three fully connected layers.
-- **Training:** Custom training loop with ELBO loss computation and probabilistic sampling.
-- **Evaluation:** Ensemble predictions, accuracy logging, and uncertainty visualization.
-- **Experiments:** Detailed analysis of epistemic uncertainty for in-distribution and novel inputs.
+- **Modeling:** Bayesian network architecture with configurable hidden units and two stochastic layers.
+- **Training:** A custom training loop that incorporates KL divergence reweighting, learning rate decay, and Monte Carlo approximation of the ELBO loss.
+- **Evaluation:** Ensemble predictions with uncertainty estimation, comparative analysis among Bayesian and deterministic approaches, and visualization of posterior distributions.
+- **Experiments:** Systematic hyperparameter tuning and comprehensive diagnostic plots that illustrate convergence behavior and the impact of model regularization.
