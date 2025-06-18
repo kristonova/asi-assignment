@@ -1,7 +1,7 @@
 # Fdb version 4
-["pdflatex"] 1747681761.39396 "/Users/mymac/Study Abroad/Master Computer Science EURECOM/ASI/Assignment/asi-assignment/report/bayes_by_backprop-RAHMANTO.tex" "bayes_by_backprop-RAHMANTO.pdf" "bayes_by_backprop-RAHMANTO" 1747681761.94954 0
+["pdflatex"] 1750232955.61906 "/Users/mymac/Study Abroad/Master Computer Science EURECOM/ASI/Assignment/asi-assignment/report/bayes_by_backprop-RAHMANTO.tex" "bayes_by_backprop-RAHMANTO.pdf" "bayes_by_backprop-RAHMANTO" 1750232956.19342 0
   "/Users/mymac/Study" 1734554377.68921 566 66cfd5857e1db6f09d34e10d88d6ca61 ""
-  "/Users/mymac/Study Abroad/Master Computer Science EURECOM/ASI/Assignment/asi-assignment/report/bayes_by_backprop-RAHMANTO.tex" 1747681761.20577 19397 221f48d3c2004fb06f954f78fe3f6980 ""
+  "/Users/mymac/Study Abroad/Master Computer Science EURECOM/ASI/Assignment/asi-assignment/report/bayes_by_backprop-RAHMANTO.tex" 1750232955.43309 19908 94a807ba560be10caa39ceeb60da724a ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm" 1136768653 2172 fd0c924230362ff848a33632ed45dc23 ""
@@ -107,9 +107,9 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1745567598 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1745567513 3345741 17c72442f853b990681e9bae50bde869 ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "bayes_by_backprop-RAHMANTO.aux" 1747681761.89029 2971 d3c00e96b5ffe4f39dc341e77ac18ca4 "pdflatex"
-  "bayes_by_backprop-RAHMANTO.out" 1747681761.89112 1396 924959f3ac82495ca680e5e76d9f8dcf "pdflatex"
-  "bayes_by_backprop-RAHMANTO.tex" 1747681761.20577 19397 221f48d3c2004fb06f954f78fe3f6980 ""
+  "bayes_by_backprop-RAHMANTO.aux" 1750232956.13277 2971 d3c00e96b5ffe4f39dc341e77ac18ca4 "pdflatex"
+  "bayes_by_backprop-RAHMANTO.out" 1750232956.13362 1396 924959f3ac82495ca680e5e76d9f8dcf "pdflatex"
+  "bayes_by_backprop-RAHMANTO.tex" 1750232955.43309 19908 94a807ba560be10caa39ceeb60da724a ""
   "neurips_2024.sty" 1747642179.90276 11625 b5f853b54a7a098e9e5b837f826d5daa ""
   (generated)
   "bayes_by_backprop-RAHMANTO.aux"

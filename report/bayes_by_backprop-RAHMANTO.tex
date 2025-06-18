@@ -207,7 +207,7 @@ Our ablation analysis indicates that the remaining accuracy gap is primarily a f
 
 In practical terms, the reproduced results underscore a trade-off: Bayes by Backprop offers calibrated uncertainty estimates and dramatic parameter sparsity in exchange for a modest drop in peak accuracy.  For applications where model size, interpretability, or risk awareness outweigh the last fraction of a percentage point in accuracy, variational Bayesian neural networks remain a powerful and principled alternative to purely deterministic deep-learning techniques.
 \section*{Acknowledgements}
-
+The author was inspired by the code provided by the following link: \href{https://www.nitarshan.com/bayes-by-backprop/}{https://www.nitarshan.com/bayes-by-backprop/}. However, the author decided not use the FMNIST dataset; instead, adhered to the dataset originally mentioned by Blundell in the seminal paper. Additionally, the author acknowledged on utilizing LLM Copilot to assist in code development and report, specifically for ablation studies, activation of the PyTorch GPU, and verbose CSV report saving.
 The authors gratefully acknowledge the support of \href{https://efisonlt.com}{Efison Lisan Teknologi} through its Aleleon Supercomputer sponsorship programme.  All experiments reported in this work were executed on the ALELEON Supercomputer housed at Efison Lisan Teknologi HQ, Indonesia, whose generous computational resources made the reproduction study feasible.
 \bibliographystyle{plain}
 \begin{thebibliography}{9}
